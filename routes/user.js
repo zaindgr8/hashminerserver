@@ -10,7 +10,9 @@ router.post("/login", async (req, res) => {
     const token = await createToken({ email: email });
     console.log(token);
     if (data) {
-      res.status(200).json({ message: "Login Successful", token });
+      res
+        .status(200)
+        .json({ message: "Login Successful", token, success: true });
     } else {
       res.status(400).json({ message: "Invalid Credentials" });
     }
@@ -31,7 +33,7 @@ router.post("/signup", async (req, res) => {
     });
     const user = await data.save();
     const token = await createToken({ email: user.email });
-    res.status(201).json({ message: "Signup", token });
+    res.status(201).json({ message: "Signup", token, success: true });
   } catch (error) {
     res.status(500).json({ message: error });
   }
